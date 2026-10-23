@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProofPath | Scholarship Intelligence</title>
+<style>
+:root{--bg:#080b16;--panel:#111629;--line:#252d45;--muted:#929bb5;--cyan:#64f4e2;--purple:#a78bfa;--white:#f4f6ff;--green:#65e6a5}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 80% 0%,#20204a 0,transparent 38%),var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1320px;margin:auto;padding:26px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:25px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:800;letter-spacing:-.7px}
+.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#080b16;font-weight:950;font-size:22px;box-shadow:0 0 30px #64f4e230}
+.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:600;margin-top:3px}
+.status{border:1px solid #285448;border-radius:30px;padding:8px 12px;color:var(--green);font-size:11px;letter-spacing:1px}
+.hero{padding:44px 0 28px;max-width:850px}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2.6px}
+h1{font-size:clamp(38px,6vw,65px);letter-spacing:-3px;line-height:1.04;margin:15px 0}
+h1 span{background:linear-gradient(90deg,var(--cyan),var(--purple));background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero p{color:#aab3cb;line-height:1.8;font-size:15px;max-width:680px}
+.layout{display:grid;grid-template-columns:1.05fr 1.5fr;gap:20px;align-items:start}
+.panel{background:linear-gradient(145deg,#141a30ed,#0e1324f5);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 16px 50px #0002}
+.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px}
+.panel-title h2{font-size:17px;margin:0}
+.step{font-size:10px;color:var(--cyan);letter-spacing:1px}
+label{display:block;color:#b7c0d7;font-size:12px;margin:18px 0 8px}
+input,select{width:100%;background:#090e1d;border:1px solid #303954;color:white;border-radius:10px;padding:13px;outline:none}
+input:focus,select:focus{border-color:var(--cyan)}
+.hint{font-size:11px;color:var(--muted);line-height:1.6;margin-top:7px}
+.checklist{display:grid;gap:9px;margin-top:12px}
+.check{display:flex;align-items:center;gap:10px;background:#0b1020;border:1px solid #222c43;border-radius:11px;padding:12px;color:#c7cfe1;font-size:12px;cursor:pointer}
+.check input{width:16px;height:16px;accent-color:#64f4e2}
+.primary{width:100%;margin-top:22px;border:0;border-radius:11px;padding:15px;background:linear-gradient(100deg,var(--cyan),#9ce9f9 48%,var(--purple));color:#080b16;font-weight:850;box-shadow:0 8px 30px #64f4e218}
+.primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.metric{padding:16px 12px;background:#0b1020;border:1px solid #252e47;border-radius:13px}
+.metric strong{font-size:27px;letter-spacing:-1px;display:block}
+.metric span{display:block;color:var(--muted);font-size:10px;margin-top:6px;line-height:1.4}
+.section-label{font-size:10px;letter-spacing:1.8px;color:var(--muted);margin:27px 0 12px;font-weight:800}
+.readiness{display:flex;align-items:center;gap:18px;padding:18px;background:#0b1020;border:1px solid #252e47;border-radius:14px;margin-top:18px}
+.ring{height:83px;width:83px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--cyan) 0deg,#283149 0deg);position:relative}
+.ring:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#0b1020}
+.ring strong{z-index:1;font-size:21px}
+.readiness h3{font-size:15px;margin:0 0 6px}
+.readiness p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}
+.requirement{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid #252d42}
+.requirement:last-child{border-bottom:0}
+.req-icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;font-weight:800;background:#24372f;color:var(--green)}
+.req-icon.warn{background:#3a3020;color:#ffc96b}
+.req-icon.info{background:#242443;color:var(--purple)}
+.req-body{flex:1;min-width:0}
+.req-body strong{font-size:12px;display:block;margin-bottom:5px}
+.req-body p{margin:0;color:var(--muted);font-size:11px;line-height:1.65}
+.tag{font-size:9px;letter-spacing:.7px;padding:5px 7px;border-radius:6px;white-space:nowrap;background:#20372f;color:var(--green)}
+.tag.warn{background:#392e1c;color:#ffd080}
+.tag.info{background:#292443;color:#c2b3ff}
+.action{padding:13px;border:1px solid #28324c;background:#0b1020;border-radius:11px;margin-top:9px;display:flex;gap:11px;font-size:12px;line-height:1.6}
+.num{display:grid;place-items:center;width:25px;height:25px;flex-shrink:0;background:#212b43;border-radius:7px;color:var(--cyan);font-weight:800}
+.action small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.sources{font-size:11px;line-height:1.8;color:var(--muted)}
+.sources a{color:var(--cyan);text-decoration:none}
+.bottom{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:10px}
+.ghost{background:transparent;border:1px solid #38415b;color:#dbe3f8;padding:10px 13px;border-radius:9px;font-size:11px}
+.toast{display:none;margin-top:12px;padding:12px;border:1px solid #285448;background:#10251f;border-radius:10px;color:var(--green);font-size:12px}
+footer{text-align:center;color:#737d98;font-size:10px;padding:32px 0 10px;letter-spacing:.5px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.shell{padding:18px}.hero{padding-top:32px}.panel{padding:18px}h1{letter-spacing:-2px}}
+@media(max-width:420px){.results{grid-template-columns:1fr}.metric{display:flex;align-items:center;justify-content:space-between}.metric span{max-width:100px;text-align:right}.status{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="brand"><div class="logo">P</div><div>ProofPath<small>APPLICATION INTELLIGENCE</small></div></div>
+ <div class="status">● PROTOTYPE ONLINE</div>
+</header>
+
+<section class="hero">
+ <div class="eyebrow">YOUR FUTURE. A CLEARER PATH.</div>
+ <h1>Turn requirements<br>into <span>opportunities.</span></h1>
+ <p>Navigate scholarship requirements with clarity. Check your readiness, discover missing evidence, and get a personalized action plan backed by published sources.</p>
+</section>
+
+<main class="layout">
+<section class="panel">
+ <div class="panel-title"><h2>Readiness assessment</h2><span class="step">01 / INPUT</span></div>
+ <label for="student">Student name</label>
+ <input id="student" placeholder="Enter your name" value="Alex Morgan">
+ <label for="scholarship">Select a sample scholarship</label>
+ <select id="scholarship">
+  <option value="national">National Scholarship — Demo</option>
+  <option value="merit">Merit Excellence Award — Demo</option>
+  <option value="need">Student Support Grant — Demo</option>
+ </select>
+ <div class="hint">Demonstration scenarios only. Confirm actual eligibility and current requirements with the relevant official scholarship provider.</div>
+ <div class="section-label">DOCUMENT CHECKLIST</div>
+ <div class="checklist" id="checklist">
+  <label class="check"><input type="checkbox" checked> Identity proof available</label>
+  <label class="check"><input type="checkbox" checked> Academic marksheet available</label>
+  <label class="check"><input type="checkbox"> Income certificate available</label>
+  <label class="check"><input type="checkbox" checked> Bank details available</label>
+  <label class="check"><input type="checkbox"> Institution verification available</label>
+ </div>
+ <label for="notes">Additional context (optional)</label>
+ <input id="notes" placeholder="e.g. Need help understanding criteria">
+ <button class="primary" id="analyze">✦ Analyze my readiness</button>
+ <div class="toast" id="toast" role="status"></div>
+</section>
+
+<section class="panel" aria-live="polite">
+ <div class="panel-title"><h2 id="resultTitle">Your readiness overview</h2><span class="step">02 / INSIGHTS</span></div>
+ <div class="results">
+  <div class="metric"><strong id="metricScore">60%</strong><span>DOCUMENT READINESS</span></div>
+  <div class="metric"><strong id="metricMissing">2</strong><span>ITEMS TO REVIEW</span></div>
+  <div class="metric"><strong id="metricVerified">3/5</strong><span>ITEMS MARKED AVAILABLE</span></div>
+ </div>
+ <div class="readiness">
+  <div class="ring" id="ring"><strong id="ringScore">60%</strong></div>
+  <div><h3 id="readinessTitle">You're making progress</h3><p id="readinessText">Review the missing items below to prepare your next steps. This score reflects document checklist completion, not official eligibility.</p></div>
+ </div>
+ <div class="section-label">EVIDENCE & REQUIREMENTS</div>
+ <div id="requirements">
+  <div class="requirement"><div class="req-icon">✓</div><div class="req-body"><strong>Identity proof</strong><p>Marked available by the user. Confirm it matches the provider's current requirements.</p></div><span class="tag">AVAILABLE</span></div>
+  <div class="requirement"><div class="req-icon">✓</div><div class="req-body"><strong>Academic marksheet</strong><p>Marked available by the user. Verify the required academic year and format.</p></div><span class="tag">AVAILABLE</span></div>
+  <div class="requirement"><div class="req-icon warn">!</div><div class="req-body"><strong>Income certificate</strong><p>Not marked available. Check whether this sample scenario requires one.</p></div><span class="tag warn">REVIEW</span></div>
+  <div class="requirement"><div class="req-icon">✓</div><div class="req-body"><strong>Bank details</strong><p>Marked available by the user. Check the provider's instructions before submitting.</p></div><span class="tag">AVAILABLE</span></div>
+  <div class="requirement"><div class="req-icon warn">!</div><div class="req-body"><strong>Institution verification</strong><p>Not marked available. Confirm the verification process with your institution.</p></div><span class="tag warn">REVIEW</span></div>
+ </div>
+ <div class="section-label">YOUR NEXT STEPS</div>
+ <div id="actions">
+  <div class="action"><span class="num">1</span><div><strong>Review income documentation</strong><small>Check the official scholarship requirements to confirm whether this document is needed.</small></div></div>
+  <div class="action"><span class="num">2</span><div><strong>Contact your institution</strong><small>Ask about any required enrollment or verification document.</small></div></div>
+ </div>
+ <div class="section-label">SOURCE & TRUST</div>
+ <div class="sources">This demo uses illustrative checklist scenarios, not live eligibility data. For Indian scholarships, begin at the <a href="https://scholarships.gov.in/" target="_blank" rel="noopener noreferrer">National Scholarship Portal ↗</a>. Always verify current criteria, deadlines, and documents with the official provider.</div>
+ <div class="bottom"><span>Evidence first. Assumptions clearly flagged.</span><button class="ghost" id="report">↓ Export readiness report</button></div>
+ <div class="toast" id="reportToast"></div>
+</section>
+</main>
+<footer>PROOFPATH © 2026 · A STUDENT-BUILT CONCEPT · NOT AN OFFICIAL GOVERNMENT SERVICE</footer>
+</div>
+
+<script>
+const docs=[
+ {name:"Identity proof",desc:"Confirm the accepted identity document and format in the official instructions.",action:"Review accepted identity documents"},
+ {name:"Academic marksheet",desc:"Check the required academic year, marks, and file format.",action:"Confirm academic document requirements"},
+ {name:"Income certificate",desc:"Check whether an income certificate is required for this scholarship scenario.",action:"Review income documentation"},
+ {name:"Bank details",desc:"Confirm the provider's requirements for bank details and account ownership.",action:"Verify bank information requirements"},
+ {name:"Institution verification",desc:"Check whether your institution must verify enrollment or certify the application.",action:"Contact your institution"}
+];
+const presets={
+ national:[true,true,false,true,false],
+ merit:[true,true,true,false,true],
+ need:[true,false,false,true,false]
+};
+const $=id=>document.getElementById(id);
+function selected(){return [...document.querySelectorAll('#checklist input')].map(x=>x.checked)}
+function render(){
+ const checks=selected(),count=checks.filter(Boolean).length,score=Math.round(count/docs.length*100);
+ $('metricScore').textContent=score+'%';$('ringScore').textContent=score+'%';
+ $('metricMissing').textContent=docs.length-count;$('metricVerified').textContent=count+'/'+docs.length;
+ $('ring').style.background=`conic-gradient(var(--cyan) ${score*3.6}deg,#283149 ${score*3.6}deg)`;
+ $('readinessTitle').textContent=score===100?'All checklist items marked available':score>=60?'You’re making progress':'Let’s build your checklist';
+ $('readinessText').textContent=score===100?'Every demo checklist item is marked available. Verify the current official requirements before applying.':'Your score measures checklist completion only. Review the flagged items and confirm which requirements actually apply.';
+ $('requirements').innerHTML=docs.map((d,i)=>`<div class="requirement"><div class="req-icon ${checks[i]?'':'warn'}">${checks[i]?'✓':'!'}</div><div class="req-body"><strong>${d.name}</strong><p>${checks[i]?'Marked available by you. '+d.desc:'Not marked available. '+d.desc}</p></div><span class="tag ${checks[i]?'':'warn'}">${checks[i]?'AVAILABLE':'REVIEW'}</span></div>`).join('');
+ const missing=docs.map((d,i)=>({...d,i})).filter(d=>!checks[d.i]);
+ $('actions').innerHTML=missing.length?missing.map((d,j)=>`<div class="action"><span class="num">${j+1}</span><div><strong>${d.action}</strong><small>${d.desc}</small></div></div>`).join(''):'<div class="action"><span class="num">✓</span><div><strong>Checklist complete</strong><small>Now verify every item against the official scholarship instructions.</small></div></div>';
+ $('resultTitle').textContent=($('student').value.trim()||'Your')+'’s readiness overview';
+}
+$('scholarship').addEventListener('change',e=>{
+ const values=presets[e.target.value];
+ document.querySelectorAll('#checklist input').forEach((x,i)=>x.checked=values[i]);
+ render();
+});
+$('analyze').addEventListener('click',()=>{
+ render();
+ $('toast').style.display='block';
+ $('toast').textContent='✓ Assessment complete. Results updated using your checklist selections.';
+});
+document.querySelectorAll('#checklist input').forEach(x=>x.addEventListener('change',render));
+$('student').addEventListener('input',render);
+$('report').addEventListener('click',()=>{
+ const name=$('student').value.trim()||'Student';
+ const checks=selected();
+ const score=Math.round(checks.filter(Boolean).length/docs.length*100);
+ const lines=[
+  'PROOFPATH — READINESS REPORT',
+  'Student: '+name,
+  'Scenario: '+$('scholarship').selectedOptions[0].text,
+  'Checklist completion: '+score+'%',
+  '',
+  ...docs.map((d,i)=>(checks[i]?'[AVAILABLE] ':'[REVIEW] ')+d.name),
+  '',
+  'This is a demo checklist, not an official eligibility decision.',
+  'Verify all requirements with the official scholarship provider.',
+  'National Scholarship Portal: https://scholarships.gov.in/'
+ ];
+ const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='ProofPath-Readiness-Report.txt';a.click();
+ URL.revokeObjectURL(url);
+ $('reportToast').style.display='block';
+ $('reportToast').textContent='Your sample readiness report was exported.';
+});
+render();
+</script>
+</body>
+</html>
